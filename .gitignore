@@ -1,32 +1,42 @@
-# Prerequisites
-*.d
+#include "stdafx.h"
+#include <iostream>
+#include <sstream>
+using namespace std;
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+bool read_numbers(int array[10])
+{
+	string string;
+	getline(cin, string);
+	istringstream stream(string);
+	bool success = true;
+	for (int a = 0; a < 10; ++a) {
+		if (!(stream >> array[a])) {
+			success = false;
+			break;
+		}
+	}
 
-# Precompiled Headers
-*.gch
-*.pch
+	return success;
+}
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+int main()
+{
+	int array1[10];
+	int array2[10];
+	int max = 0;
 
-# Fortran module files
-*.mod
-*.smod
+	if (read_numbers(array1) && read_numbers(array2)) {
+		for (int a = 0; a<10; a++) {
+			for (int b = 0; b<10; b++) {
+				if (max < array1[a] + array2[b]) max = array1[a] + array2[b];
+			}
+		}
+		cout << max;
+	}
+	else {
+		cout << "An error has occurred while reading numbers";
+		cin.get();
+		return(0);
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+	}
+}
